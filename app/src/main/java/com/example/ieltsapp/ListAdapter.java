@@ -59,15 +59,16 @@ public class ListAdapter extends BaseAdapter {
             holder = (Holder) view.getTag();
         }
         holder.textView.setText(list.get(i));
+        final FrameLayout frameLayout = holder.frameLayout;
         final int ii = i;
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = context.fragmentManager;
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragA");
+                FragmentA fragmentA = (FragmentA) fragmentManager.findFragmentByTag("FragA"+ii);
                 if (fragmentA == null)
-                fragmentTransaction.add(R.id.frameitem, new FragmentA(), "FragA");
+                fragmentTransaction.add(frameLayout.getId(), new FragmentA(), "FragA"+ii);
                 else
                     fragmentTransaction.remove(fragmentA);
                fragmentTransaction.commit();
